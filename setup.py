@@ -19,6 +19,9 @@ with open(
 with open('version.json') as f:
     version = '.'.join(str(part) for part in json.load(f))
 
+with open('requirements/base.txt') as f:
+    requirements = f.readlines()
+
 setup(
     name = 'django-powerdns-dnssec',
     version = version,
@@ -55,24 +58,6 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    install_requires = [
-        'Django==1.8.13',
-        'IPy>=0.82a',
-        'django-autocomplete-light==2.3.3',
-        'django-extensions>=1.5.5',
-        'django-nose>=1.4',
-        'dj.choices>=0.10.0',
-        'mysqlclient==1.3.7',
-        'nose-cov>=1.6',
-        'factory_boy>=2.5.2',
-        # 3.3.3 includes bug, https://github.com/rtfd/readthedocs.org/issues/2101
-        'djangorestframework==3.3.2',
-        'django-rest-swagger==0.3.8',
-        'django-filter>=0.10.0',
-        'django-threadlocals>=0.8',
-        'docutils>=0.12',
-        'rules>=0.4',
-        'raven==5.20.0'
-    ],
+    install_requires = requirements,
     zip_safe = False,  # if only because of the readme file
 )
