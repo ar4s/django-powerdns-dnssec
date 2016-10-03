@@ -28,3 +28,5 @@ testem.log
 .DS_Store
 ui/static/dist/
 ui/static/lib/
+
+dnsaas/settings/local.py

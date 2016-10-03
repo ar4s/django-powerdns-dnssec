@@ -31,6 +31,14 @@ setup(
     packages = [p for p in find_packages() if not p.startswith('example')],
     include_package_data = True,
     platforms = 'any',
+    entry_points={
+        'console_scripts': [
+            'dnsaas = dnsaas.__main__:prod',
+            'dev_dnsaas = dnsaas.__main__:dev',
+            'test_dnsaas = dnsaas.__main__:test',
+            'local_dnsaas = dnsaas.__main__:local',
+        ],
+    },
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
