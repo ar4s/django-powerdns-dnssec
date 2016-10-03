@@ -7,6 +7,6 @@ done
 
 cd dnsaas-source &&\
 make flake &&\
-python3.4 manage.py test &&\
+test_dnsaas test &&\
 cd ../integration-tests &&\
 nosetests

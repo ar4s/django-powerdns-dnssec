@@ -25,7 +25,7 @@ have them working you need to:
 * enable them by setting ``ENABLE_OWNER_NOTIFICATIONS``
 
 * configure ``FROM_EMAIL`` (the e-mail that would be a sender of the
-  notifications) 
+  notifications)
 
 * configure ``OWNER_NOTIFICATIONS`` as following::
 
@@ -87,13 +87,13 @@ add this setting to ``settings.py``::
 You have to sync and migrate the ``default`` and the ``powerdns`` databases
 separately. First the default database::
 
-  $ python manage.py syncdb
-  $ python manage.py migrate
+  $ dnsaas syncdb
+  $ dnsaas migrate
 
 Then the ``powerdns`` database::
 
-  $ python manage.py syncdb --database=powerdns
-  $ python manage.py migrate --database==powerdns powerdns
+  $ dnsaas syncdb --database=powerdns
+  $ dnsaas migrate --database==powerdns powerdns
 
 Note that the ``powerdns`` database will maintain its own separate
 migration history table. This is especially helpful if your connecting several
