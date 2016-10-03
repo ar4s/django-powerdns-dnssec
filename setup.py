@@ -20,7 +20,7 @@ with open('version.json') as f:
     version = '.'.join(str(part) for part in json.load(f))
 
 with open('requirements/base.txt') as f:
-    requirements = f.readlines()
+    requirements = f.read().splitlines()
 
 setup(
     name = 'django-powerdns-dnssec',
