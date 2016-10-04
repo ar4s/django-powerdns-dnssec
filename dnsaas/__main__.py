@@ -37,4 +37,4 @@ def local():
 
 
 if __name__ == '__main__':
-    main('dnsaas.settings.prod')
+    main('dnsaas.settings')
