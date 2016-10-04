@@ -6,6 +6,7 @@ ADD setup.py dnsaas-source/setup.py
 ADD Makefile dnsaas-source/Makefile
 ADD README.rst dnsaas-source/README.rst
 ADD version.json dnsaas-source/version.json
+ADD requirements/base.txt dnsaas-source/requirements/base.txt
 ADD powerdns dnsaas-source/powerdns
 ADD dnsaas dnsaas-source/dnsaas
 ADD ui dnsaas-source/ui
