@@ -7,11 +7,11 @@ def only_true(request):
 
 DEBUG = True
 
-INSTALLED_APPS = INSTALLED_APPS + (
+INSTALLED_APPS = INSTALLED_APPS + (  # noqa
     'debug_toolbar',
 )
 
-MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
+MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (  # noqa
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
