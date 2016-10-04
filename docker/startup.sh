@@ -8,8 +8,9 @@ done
 echo "CREATE DATABASE powerdns" | mysql -u root --password=root -h db
 cd dnsaas
 pip install -e .
+pip install -r requirements/dev.txt
 dnsaas syncdb --noinput
 dnsaas migrate --noinput
 dnsaas loaddata test
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('dnsaas', 'dnsaas@example.com', 'dnsaas')" | dnsaas shell
-dnsaas runserver 0.0.0.0:8080
+dev_dnsaas runserver 0.0.0.0:8080

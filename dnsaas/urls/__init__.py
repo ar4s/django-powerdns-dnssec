@@ -1,1 +1,1 @@
-from ralph.urls.base import urlpatterns  # noqa
+from dnsaas.urls.base import urlpatterns  # noqa

@@ -14,7 +14,7 @@ runner:
         - "mysql:db"
 dnsaas:
     build: ".."
-    links: 
+    links:
         - mysql:db
     environment:
         - DNSAAS_DB_HOST=db

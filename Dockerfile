@@ -10,5 +10,6 @@ ADD MANIFEST.in dnsaas/MANIFEST.in
 ADD README.rst dnsaas/README.rst
 ADD version.json dnsaas/version.json
 ADD requirements/base.txt dnsaas/requirements/base.txt
+ADD requirements/dev.txt dnsaas/requirements/dev.txt
 RUN pip install ./dnsaas
 CMD bin/bash dnsaas/docker/startup.sh
