@@ -1,5 +1,6 @@
 """Utilities for powerdns models"""
 
+import ipaddress
 from pkg_resources import working_set, Requirement
 
 import rules
@@ -7,23 +8,15 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.mail import send_mail
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_ipv4_address, RegexValidator
+from django.core.validators import (
+    validate_ipv4_address,
+    validate_ipv6_address,
+    RegexValidator
+)
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from threadlocals.threadlocals import get_current_user
 from dj.choices import Choices
-from IPy import IP
-
-
-def validate_ipv6_address(value):
-    try:
-        ip = IP(value)
-    except ValueError:
-        ip = None
-    if not ip or ip.version() == 4:
-        raise ValidationError(
-            _(u'Enter a valid IPv6 address.'), code='invalid',
-        )
 
 
 VERSION = working_set.find(Requirement.parse('django-powerdns-dnssec')).version
@@ -208,6 +201,26 @@ def to_reverse(ip):
     *domain_parts, number = ip.split('.')
     domain = '{}.in-addr.arpa'.format('.'.join(reversed(domain_parts)))
     return (domain, number)
+
+
+def reverse_pointer(ip):
+    """
+    Reverse `ip` to ptr.
+
+    Example:
+    >>> reverse_ip_to_ptr('192.168.1.1')
+    '1.1.168.192.in-addr.arpa'
+    >>> reverse_pointer('2001:db8::')
+    '0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa'
+    """
+    ip_obj = ipaddress.ip_address(ip)
+    if isinstance(ip_obj, ipaddress.IPv6Address):
+        reverse_chars = ip_obj.exploded[::-1].replace(':', '')
+        rev_ptr = '.'.join(reverse_chars) + '.ip6.arpa'
+    else:
+        reverse_octets = str(ip_obj).split('.')[::-1]
+        rev_ptr = '.'.join(reverse_octets) + '.in-addr.arpa'
+    return rev_ptr
 
 
 class AutoPtrOptions(Choices):
